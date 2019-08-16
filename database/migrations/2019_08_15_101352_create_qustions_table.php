@@ -16,7 +16,7 @@ class CreateQustionsTable extends Migration
         Schema::create('qustions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title'); /*setiap pertanyaan membutuhkan title*/
-            $table->string('slug')->unique();
+            $table->string('slugs')->unique();
             $table->text('body');
             $table->unsignedInteger('views')->default(0); /*unsignedInteger=integer yang tidak kurang dari 0*/
             $table->unsignedInteger('answers')->default(0);
