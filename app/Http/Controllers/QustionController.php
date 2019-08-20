@@ -14,7 +14,7 @@ class QustionController extends Controller
      */
     public function index()
     {
-        $qustions = Qustion::latest()->paginate(5);
+        $qustions = Qustion::with('user')->latest()->paginate(10);
 
         return view('qustions.index', compact('qustions'));
     }

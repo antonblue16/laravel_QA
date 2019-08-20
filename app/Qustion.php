@@ -17,4 +17,14 @@ class Qustion extends Model
         $this->attributes['title'] = $value;
         $this->attributes['slugs'] = str_slug($value);
     }
+
+    public function getUrlAttribute()
+    {
+        return route("qustions.show", $this->id);
+    }
+
+    public function getCreatedDateAttribute() //membuat format waktu
+    {
+        return $this->created_at->diffForHumans();
+    }
 }
