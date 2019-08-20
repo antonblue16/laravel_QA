@@ -10,6 +10,17 @@
                 <div class="card-body">
                     @foreach ($qustions as $qustion)
                         <div class="media">
+                        <div class="d-flex flex-column counters">
+                            <div class="vote">
+                                <strong>{{$qustion->votes}}</strong> {{str_plural('vote',$qustion->votes)}}
+                            </div>
+                            <div class="status {{$qustion->status}}">
+                                <strong>{{$qustion->answers}}</strong> {{str_plural('answers',$qustion->answers)}}
+                            </div>
+                            <div class="view">
+                                {{$qustion->views . " " . str_plural('view',$qustion->views)}}
+                            </div>
+                        </div>
                             <div class="media-body">
                                 <h3 class="mt-0"><a href="{{ $qustion->url}}">{{$qustion->title}}</a></h3>
                                 <p class="lead">
