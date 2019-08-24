@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AskQustionRequest;
 use App\Qustion;
 use Illuminate\Http\Request;
 
@@ -37,9 +38,12 @@ class QustionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AskQustionRequest $request)
     {
-        //
+        //dd('store'); //untuk debug
+        $request->user()->qustions()->create($request->all('title','body')); //all() = untuk dapat semua input pada form
+
+        return redirect()->route('qustions.index')->with('success', "Your question has been submitted"); //redirect = akan ke lokasi halaman yakni index
     }
 
     /**

@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('qustions', 'QustionController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -18,8 +18,8 @@
                     <form action="{{route('qustions.store')}}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="qustion-title">Question Title</label>
-                            <input type="text" name="title" id="qustion-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
+                            <label for="qustion-title">Question Title :</label>
+                        <input type="text" name="title" value="{{old('title')}}" id="qustion-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}">
 
                             @if($errors->has('title'))
                                 <div class="invalid-feedback">
@@ -29,8 +29,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="qustion-body">Explain You Question</label>
-                            <textarea name="body" id="qustion-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}"></textarea>
+                            <label for="qustion-body">Explain You Question :</label>
+                            <textarea name="body" id="qustion-body" rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">
+                                {{old('body')}}
+                            </textarea>
 
                             @if($errors->has('body'))
                                 <div class="invalid-feedback">
