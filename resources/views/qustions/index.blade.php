@@ -36,17 +36,17 @@
                                 <div class="d-flex align-items-center">
                                     <h3 class="mt-0"><a href="{{ $qustion->url}}">{{$qustion->title}}</a></h3>
                                     <div class="ml-auto">
-                                    @if (Auth::user()->can('update-qustion', $qustion))
-                                        <a href="{{route('qustions.edit', $qustion->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
-                                    @endif
+                                        @can ('update', $qustion)
+                                            <a href="{{route('qustions.edit', $qustion->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
+                                        @endcan
 
-                                    @if (Auth::user()->can('delete-qustion', $qustion))
-                                        <form class="form-delete" method="POST" action="{{route('qustions.destroy', $qustion->id)}}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
-                                    @endif
+                                        @can ('delete', $qustion)
+                                            <form class="form-delete" method="POST" action="{{route('qustions.destroy', $qustion->id)}}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </div>
                                 <p class="lead">

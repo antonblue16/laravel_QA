@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class QustionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=> ['index','show']]); //hanya bisa akses index dan show blade untuk yang belum menjadi user.
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,10 +72,7 @@ class QustionController extends Controller
      */
     public function edit(Qustion $qustion)
     {
-        if(\Gate::denies('update-qustion', $qustion))
-        {
-            abort(403, "Access denied");
-        }
+        $this->authorize("update", $qustion);
         return view("qustions.edit", compact('qustion'));
 
     }
@@ -84,10 +86,7 @@ class QustionController extends Controller
      */
     public function update(AskQustionRequest $request, Qustion $qustion)
     {
-        if(\Gate::denies('update-qustion', $qustion))
-        {
-            abort(403, "Access denied");
-        }
+        $this->authorize("update", $qustion);
         $qustion->update($request->only('title', 'body'));
 
         return redirect('/qustions')->with('success', "Your question has been updated");
@@ -101,11 +100,7 @@ class QustionController extends Controller
      */
     public function destroy(Qustion $qustion)
     {
-        if(\Gate::denies('delete-qustion', $qustion))
-        {
-            abort(403, "Access denied");
-        }
-
+        $this->authorize("delete", $qustion);
         $qustion->delete();
 
         return redirect('/qustions')->with('success', "Your question has been deleted");
