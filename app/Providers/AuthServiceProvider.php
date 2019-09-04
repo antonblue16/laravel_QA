@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        \Gate::define('update-qustion', function($user, $qustion){ //untuk memastikan update dan delete dilakukan oleh user itu sendiri alias sah
+            return $user->id == $qustion->user->id;
+        });
+
+        \Gate::define('delete-qustion', function($user, $qustion){
+            return $user->id == $qustion->user->id;
+        });
     }
 }

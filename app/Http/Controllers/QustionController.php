@@ -27,9 +27,9 @@ class QustionController extends Controller
      */
     public function create()
     {
-        $qustions = new Qustion();
+        $qustion = new Qustion();
 
-        return view('qustions.create', compact('qustions'));
+        return view('qustions.create', compact('qustion'));
     }
 
     /**
@@ -67,7 +67,12 @@ class QustionController extends Controller
      */
     public function edit(Qustion $qustion)
     {
+        if(\Gate::denies('update-qustion', $qustion))
+        {
+            abort(403, "Access denied");
+        }
         return view("qustions.edit", compact('qustion'));
+
     }
 
     /**
@@ -79,6 +84,10 @@ class QustionController extends Controller
      */
     public function update(AskQustionRequest $request, Qustion $qustion)
     {
+        if(\Gate::denies('update-qustion', $qustion))
+        {
+            abort(403, "Access denied");
+        }
         $qustion->update($request->only('title', 'body'));
 
         return redirect('/qustions')->with('success', "Your question has been updated");
@@ -92,6 +101,11 @@ class QustionController extends Controller
      */
     public function destroy(Qustion $qustion)
     {
+        if(\Gate::denies('delete-qustion', $qustion))
+        {
+            abort(403, "Access denied");
+        }
+
         $qustion->delete();
 
         return redirect('/qustions')->with('success', "Your question has been deleted");
