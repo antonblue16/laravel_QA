@@ -20,7 +20,7 @@ class Qustion extends Model
 
     public function getUrlAttribute()
     {
-        return route("qustions.show", $this->id);
+        return route("qustions.show", $this->slugs); //change id to slugs
     }
 
     public function getCreatedDateAttribute() //membuat format waktu
@@ -42,5 +42,10 @@ class Qustion extends Model
         {
             return "unanswered";
         }
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        return \Parsedown::instance()->text($this->body);
     }
 }
