@@ -65,7 +65,7 @@ class QustionPolicy
      */
     public function delete(User $user, Qustion $qustion)
     {
-        return $user->id == $qustion->user_id && $qustion->answers < 1; //bisa delete jika answer kurang dari 1
+        return $user->id == $qustion->user_id && $qustion->answers_count < 1; //bisa delete jika answer kurang dari 1
     }
 
     /**
