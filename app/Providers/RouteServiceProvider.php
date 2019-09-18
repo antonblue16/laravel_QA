@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::bind('slugs', function($slugs){ //display slug in url
 
-            return Qustion::where('slugs', $slugs)->first() ?? abort(404);
+            return Qustion::with('answers.user')->where('slugs', $slugs)->first() ?? abort(404);
         });
 
         parent::boot();

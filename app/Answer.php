@@ -21,6 +21,16 @@ class Answer extends Model
         return $this->hasMany(Answer::class);
     }
 
+    public function getBodyHtmlAttribute()
+    {
+        return \Parsedown::instance()->text($this->body);
+    }
+
+    public function getCreatedDateAttribute() //membuat format waktu
+    {
+        return $this->created_at->diffForHumans();
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -29,6 +39,5 @@ class Answer extends Model
             $answer->qustion->increment('answers_count');
             $answer->qustion->save();
         });
-
     }
 }
