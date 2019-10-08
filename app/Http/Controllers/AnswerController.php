@@ -30,9 +30,11 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
+    public function edit(Qustion $qustion, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+
+        return view('answers.edit', compact('qustion', 'answer'));
     }
 
     /**
@@ -42,9 +44,15 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, Qustion $qustion, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+
+        $answer->update($request->validate([
+            'body' => 'required',
+        ]));
+
+        return redirect()->route('qustions.show', $qustion->slugs)->with('success', 'Your answer has been updated');
     }
 
     /**
