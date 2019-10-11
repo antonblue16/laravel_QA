@@ -35,13 +35,22 @@ class Answer extends Model
         return $this->created_at->diffForHumans();
     }
 
+    public function getStatusAttribute()
+    {
+        return $this->id === $this->qustion->best_answer_id ? 'vote-accepted' : '';
+    }
+
     public static function boot()
     {
         parent::boot();
 
         static::created(function($answer){
             $answer->qustion->increment('answers_count');
-            $answer->qustion->save();
+            //$answer->qustion->save();
+        });
+
+        static::deleted(function($answer){
+            $answer->qustion->decrement('answers_count');
         });
     }
 }

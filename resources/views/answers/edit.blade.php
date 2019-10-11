@@ -12,7 +12,7 @@
                     <hr>
                     <form action="{{route('qustions.answers.update', [$qustion->id, $answer->id])}}" method="POST">
                         @csrf
-                        @method('PATCH') <!--PATCH untuk update lebih baik dari pada PUT-->
+                        @method('PATCH') <!--PATCH update lebih baik dari pada PUT-->
                         <div class="form-group">
                         <textarea class="form-control {{$errors->has('body') ? 'is-invalid' : ''}}" name="body" rows="7">{{old('body', $answer->body)}}</textarea>
                             @if($errors->has('body'))
