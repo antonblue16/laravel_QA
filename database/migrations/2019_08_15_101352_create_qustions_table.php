@@ -14,15 +14,15 @@ class CreateQustionsTable extends Migration
     public function up()
     {
         Schema::create('qustions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('title'); /*setiap pertanyaan membutuhkan title*/
             $table->string('slugs')->unique();
             $table->text('body');
-            $table->unsignedInteger('views')->default(0); /*unsignedInteger=integer yang tidak kurang dari 0*/
-            $table->unsignedInteger('answers')->default(0);
+            $table->unsignedBigInteger('views')->default(0); /*unsignedInteger=integer yang tidak kurang dari 0*/
+            $table->unsignedBigInteger('answers')->default(0);
             $table->integer('votes')->default(0);
-            $table->unsignedInteger('best_answer_id')->nullable(); /*jawaban terbaik tidak bisa/boleh null */
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('best_answer_id')->nullable(); /*jawaban terbaik tidak bisa/boleh null */
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
