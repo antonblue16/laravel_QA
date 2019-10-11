@@ -26,3 +26,5 @@ Route::resource('qustions', 'QustionController')->except('show');
 Route::resource('qustions.answers', 'AnswerController')->except(['index', 'create', 'show']); //bisa except bisa only tergantung pakai yg mana sesuaikan controller function yang dibutuhkan
 
 Route::get('qustions/{slugs}', 'QustionController@show')->name('qustions.show');
+
+Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept'); //Buat controller terlebih dahulu, baru membuat route untuk invoke
